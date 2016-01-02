@@ -9,6 +9,9 @@ from oauth2client import tools
 
 import datetime
 
+from connection import create_database, insert_task, get_all_tasks
+
+
 try:
     import argparse
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
@@ -65,11 +68,21 @@ def main():
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 
+    create_database()
+
     if not events:
         print('No upcoming events found.')
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
+        insert_task(event['summary'])
+
+    db_items = get_all_tasks()
+    print('db_items size: ', len(db_items))
+    for item in db_items:
+        print(item)
+
+
 
 
 if __name__ == '__main__':
