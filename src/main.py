@@ -5,9 +5,11 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from MainWindow import MainWindow
-
+from connection import create_database
 
 if __name__ == '__main__':
+    create_database()
+
     app = QApplication(sys.argv)
     w = MainWindow()
     w.show()

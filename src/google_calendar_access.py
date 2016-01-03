@@ -71,7 +71,6 @@ def sync_google_data_with_database():
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 
-    create_database()
 
     if not events:
         print('No upcoming events found.')
