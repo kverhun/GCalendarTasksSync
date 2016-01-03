@@ -9,8 +9,9 @@ from oauth2client import tools
 
 import datetime
 
-from connection import create_database, insert_task, get_all_tasks
-from utils import rfc3339_to_unix_time
+from connection import create_database, get_all_tasks
+
+from database_sync import sync_database_with_retrieved_data
 
 try:
     import argparse
@@ -64,7 +65,7 @@ def main():
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
     eventsResult = service.events().list(
-        calendarId='nq1jsevb9fkeh037jba84u6e9o@group.calendar.google.com', timeMin=now, maxResults=10, singleEvents=True,
+        calendarId='nq1jsevb9fkeh037jba84u6e9o@group.calendar.google.com', timeMin='2016-01-01T0:00:00+02:00', timeMax=now, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 
@@ -76,12 +77,7 @@ def main():
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
 
-        insert_task(
-            event['id'],
-            event['summary'],
-            rfc3339_to_unix_time(event['start'].get('dateTime')),
-            rfc3339_to_unix_time(event['end'].get('dateTime'))
-        )
+    sync_database_with_retrieved_data(events)
 
     db_items = get_all_tasks()
     print('db_items size: ', len(db_items))

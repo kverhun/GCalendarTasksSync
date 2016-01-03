@@ -96,4 +96,4 @@ crashlytics-build.properties
 fabric.properties
 
 #sqlite database
-database.db
+database/tasks.db
