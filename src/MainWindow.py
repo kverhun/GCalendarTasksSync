@@ -14,12 +14,12 @@ class MainWindow(QWidget):
         self.ui = None
         self.last_task_id = 0
         self.InitGUI()
+        self.UpdateFromGoogle()
 
     def InitGUI(self):
         self.ui = uic.loadUi('gui/MainWindow.ui', self)
         self.ui.syncButton.clicked.connect(self.UpdateFromGoogle)
         self.ui.addTaskButton.clicked.connect(self.OnTaskAdd)
-        self.UpdateTasksTable()
 
     def OnTaskAdd(self):
         title = self.ui.taskTitleEdit.text()
