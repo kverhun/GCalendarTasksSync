@@ -97,3 +97,6 @@ fabric.properties
 
 #sqlite database
 database/tasks.db
+
+#pyc
+*.pyc

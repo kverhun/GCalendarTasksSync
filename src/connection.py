@@ -7,6 +7,7 @@ def create_database():
     connection = sqlite3.connect('../database/tasks.db')
     c = connection.cursor()
     c.execute('''create table if not exists calendar_items (id text primary key, title text, time_start integer, time_end integer)''')
+    c.execute('''create table if not exists tasks (id integer primary key, title text, spent_time real)''')
     connection.commit()
 
 
