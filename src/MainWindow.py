@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QTableWidgetItem
 
 from google_calendar_access import sync_google_data_with_database
 from tasks_database_sync import add_new_task, get_tasks_list
+from sync_calendar_and_tasks_data import sync_calendar_and_tasks_data
 
 class MainWindow(QWidget):
 
@@ -16,7 +17,7 @@ class MainWindow(QWidget):
 
     def InitGUI(self):
         self.ui = uic.loadUi('gui/MainWindow.ui', self)
-        self.ui.syncButton.clicked.connect(sync_google_data_with_database)
+        self.ui.syncButton.clicked.connect(self.UpdateFromGoogle)
         self.ui.addTaskButton.clicked.connect(self.OnTaskAdd)
         self.UpdateTasksTable()
 
@@ -36,6 +37,10 @@ class MainWindow(QWidget):
             self.ui.tasksTableWidget.insertRow(row_number)
             self.ui.tasksTableWidget.setItem(row_number, 0, QTableWidgetItem(str(task[0])))
             self.ui.tasksTableWidget.setItem(row_number, 1, QTableWidgetItem(task[1]))
-            self.ui.tasksTableWidget.setItem(row_number, 2, QTableWidgetItem(str(task[2])))
+            self.ui.tasksTableWidget.setItem(row_number, 2, QTableWidgetItem(str(task[2]/3600)))
 
+    def UpdateFromGoogle(self):
+        sync_google_data_with_database()
+        sync_calendar_and_tasks_data()
+        self.UpdateTasksTable()
 

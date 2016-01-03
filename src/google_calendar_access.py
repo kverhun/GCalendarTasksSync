@@ -9,7 +9,7 @@ from oauth2client import tools
 
 import datetime
 
-from connection import create_database, get_all_tasks
+from connection import create_database, get_all_events
 
 from database_sync import sync_database_with_retrieved_data
 
@@ -80,7 +80,7 @@ def sync_google_data_with_database():
 
     sync_database_with_retrieved_data(events)
 
-    db_items = get_all_tasks()
+    db_items = get_all_events()
     print('db_items size: ', len(db_items))
     for item in db_items:
         print(item)
