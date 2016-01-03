@@ -15,3 +15,8 @@ class MainWindow(QWidget):
     def InitGUI(self):
         self.ui = uic.loadUi('gui/MainWindow.ui', self)
         self.ui.syncButton.clicked.connect(sync_google_data_with_database)
+        self.ui.addTaskButton.clicked.connect(self.OnTaskAdd)
+
+    def OnTaskAdd(self):
+        title = self.ui.taskTitleEdit.text()
+        print('New task: title', title)
