@@ -1,6 +1,7 @@
 from __future__ import print_function
 import httplib2
 import os
+import sys
 
 from apiclient import discovery
 import oauth2client
@@ -12,6 +13,8 @@ import datetime
 from connection import create_database, get_all_tasks
 
 from database_sync import sync_database_with_retrieved_data
+
+from PyQt5.QtWidgets import QApplication, QWidget
 
 try:
     import argparse
@@ -87,3 +90,12 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    app = QApplication(sys.argv)
+    w = QWidget()
+    w.resize(250, 150)
+    w.move(300, 300)
+    w.setWindowTitle('Application title')
+    w.show()
+
+    sys.exit(app.exec_())
