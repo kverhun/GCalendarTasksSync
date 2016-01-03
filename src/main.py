@@ -10,7 +10,7 @@ from oauth2client import tools
 import datetime
 
 from connection import create_database, insert_task, get_all_tasks
-
+from utils import rfc3339_to_unix_time
 
 try:
     import argparse
@@ -75,7 +75,13 @@ def main():
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
-        insert_task(event['summary'])
+
+        insert_task(
+            event['id'],
+            event['summary'],
+            rfc3339_to_unix_time(event['start'].get('dateTime')),
+            rfc3339_to_unix_time(event['end'].get('dateTime'))
+        )
 
     db_items = get_all_tasks()
     print('db_items size: ', len(db_items))
