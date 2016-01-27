@@ -4,7 +4,7 @@ Tool for time tracking with Google calendar
 Functionality:
 --------------
 
-  - Creating items to track time to using desktop client
+  - Creating items for time tracking using desktop client
   - Collection data from Google Calendar - how much time spent for each item
 
 Basic workflow:
