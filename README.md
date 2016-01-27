@@ -5,7 +5,7 @@ Functionality:
 --------------
 
   - Creating items for time tracking using desktop client
-  - Collection data from Google Calendar - how much time spent for each item
+  - Collecting data from Google Calendar - how much time spent for each item
 
 Basic workflow:
 ---------------
