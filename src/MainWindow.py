@@ -37,6 +37,9 @@ class MainWindow(QWidget):
             except:
                 add_new_task(title, None)
         self.UpdateTasksTable()
+        self.ui.taskTitleEdit.clear()
+        self.ui.parentIdEdit.clear()
+
 
     def UpdateTasksTable(self):
         self.ui.tasksTableWidget.setRowCount(0)
