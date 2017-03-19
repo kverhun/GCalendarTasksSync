@@ -25,8 +25,17 @@ class MainWindow(QWidget):
         title = self.ui.taskTitleEdit.text()
         id = self.last_task_id + 1
         self.last_task_id = id
-        print('New task: title', title, 'id:', id)
-        add_new_task(title)
+
+        parent_id_str = self.ui.parentIdEdit.text()
+
+        if not parent_id_str:
+            add_new_task(title, None)
+        else:
+            try:
+                parent_id = int(parent_id_str)
+                add_new_task(title, parent_id)
+            except:
+                add_new_task(title, None)
         self.UpdateTasksTable()
 
     def UpdateTasksTable(self):
@@ -38,6 +47,8 @@ class MainWindow(QWidget):
             self.ui.tasksTableWidget.setItem(row_number, 0, QTableWidgetItem(str(task[0])))
             self.ui.tasksTableWidget.setItem(row_number, 1, QTableWidgetItem(task[1]))
             self.ui.tasksTableWidget.setItem(row_number, 2, QTableWidgetItem(str(task[2]/3600)))
+            self.ui.tasksTableWidget.setItem(row_number, 3, QTableWidgetItem(str(task[3])))
+
 
     def UpdateFromGoogle(self):
         sync_google_data_with_database()

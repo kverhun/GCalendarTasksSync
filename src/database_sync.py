@@ -7,6 +7,7 @@ from connection import insert_task, clear_events_table
 def sync_database_with_retrieved_data(event_items):
     clear_events_table()
     for event in event_items:
+        print(event['id'])
         insert_task(
             event['id'],
             event['summary'],

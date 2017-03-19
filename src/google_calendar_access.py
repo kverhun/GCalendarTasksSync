@@ -67,7 +67,7 @@ def sync_google_data_with_database():
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
     eventsResult = service.events().list(
-        calendarId='nq1jsevb9fkeh037jba84u6e9o@group.calendar.google.com', timeMin='2016-01-01T0:00:00+02:00', timeMax=now, singleEvents=True,
+        calendarId='s9p04c0m2em3i33uat5mbb93b4@group.calendar.google.com', timeMin='2016-01-01T0:00:00+02:00', timeMax=now, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 

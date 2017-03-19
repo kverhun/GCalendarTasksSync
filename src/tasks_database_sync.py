@@ -2,10 +2,12 @@ __author__ = 'Kostya'
 
 import sqlite3
 
-def add_new_task(title):
+def add_new_task(title, parent_id):
     connection = sqlite3.connect('../database/tasks.db')
     c = connection.cursor()
-    c.execute('''insert into tasks (title, spent_time) values (?,?)''', [title, 0])
+
+    c.execute('''insert into tasks (title, spent_time, parent_id) values (?,?,?)''', [title, 0, parent_id])
+
     c.close()
     connection.commit()
 
